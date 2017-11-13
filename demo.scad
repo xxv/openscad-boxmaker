@@ -7,10 +7,31 @@ thickness = 3;
 // Tab width (X, Y, Z) (mm)
 tabs = [7, 7, 7];
 
-show_3d = 0;
-
-if (show_3d) {
-  box_3d(box_inner, thickness, tabs);
-} else {
-  box_2d(box_inner, thickness, tabs);
+//layout_2d(box_inner, thickness) {
+color("black") cube(box_inner);
+layout_3d(box_inner, thickness) {
+  difference() {
+    side_a(box_inner, thickness, tabs);
+      text("top");
+  }
+  difference() {
+    side_a(box_inner, thickness, tabs);
+      text("bottom");
+  }
+  difference() {
+    side_b(box_inner, thickness, tabs);
+      text("left");
+  }
+  difference() {
+    side_b(box_inner, thickness, tabs);
+      text("right");
+  }
+  difference() {
+    side_c(box_inner, thickness, tabs);
+      text("front");
+  }
+  difference() {
+    side_c(box_inner, thickness, tabs);
+      text("back");
+  }
 }
