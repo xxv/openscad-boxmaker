@@ -13,6 +13,8 @@ layout_3d(box_inner, thickness) {
   difference() {
     side_a(box_inner, thickness, tabs);
       text("top");
+      translate([box_inner[0] / 2, box_inner[1] / 2])
+        circle(r=10);
   }
   difference() {
     side_a(box_inner, thickness, tabs);
