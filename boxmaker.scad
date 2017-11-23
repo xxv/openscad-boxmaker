@@ -5,8 +5,8 @@
  * http://boxdesigner.connectionlab.org/
  */
 module box_2d(box_inner, thickness, tabs, margin=2) {
-  layout_2d(box_inner) {
-    side_a(box_inner, thickness, tabs);
+  layout_2d(box_inner, thickness) {
+    side_a_top(box_inner, thickness, tabs);
     side_a(box_inner, thickness, tabs);
     side_b(box_inner, thickness, tabs);
     side_b(box_inner, thickness, tabs);
@@ -18,7 +18,7 @@ module box_2d(box_inner, thickness, tabs, margin=2) {
 // An assembled version of the box for previewing.
 module box_3d(inner, thickness, tabs) {
   layout_3d(box_inner, thickness) {
-    side_a(box_inner, thickness, tabs);
+    side_a_top(box_inner, thickness, tabs);
     side_a(box_inner, thickness, tabs);
     side_b(box_inner, thickness, tabs);
     side_b(box_inner, thickness, tabs);
@@ -33,11 +33,9 @@ module layout_2d(inner, thickness, margin=2) {
 
   // bottom
   children(0);
-
   // top
   translate([spacingA, 0, 0])
     children(1);
-
   // right
   translate([spacingA * 2, inner[1], 0])
     rotate([0, 0, -90])
@@ -99,7 +97,13 @@ module layout_3d(box_inner, thickness) {
   }
 }
 
-// top/bottom
+module side_a_top(inner, thickness, tabs) {
+  side([inner[0], inner[1]],
+       thickness,
+       [tabs[3], tabs[4], tabs[3], tabs[4]],
+       [0, 0, 0, 0]);
+}
+
 module side_a(inner, thickness, tabs) {
   side([inner[0], inner[1]],
        thickness,
@@ -111,7 +115,7 @@ module side_a(inner, thickness, tabs) {
 module side_b(inner, thickness, tabs) {
   side([inner[1], inner[2]],
        thickness,
-       [tabs[1], tabs[2], tabs[1], tabs[2]],
+       [tabs[4], tabs[2], tabs[1], tabs[2]],
        [1, 0, 1, 0]);
 }
 
@@ -119,7 +123,7 @@ module side_b(inner, thickness, tabs) {
 module side_c(inner, thickness, tabs) {
   side([inner[0], inner[2]],
        thickness,
-       [tabs[0], tabs[2], tabs[0], tabs[2]],
+       [tabs[3], tabs[2], tabs[0], tabs[2]],
        [1, 1, 1, 1]);
 }
 
@@ -200,4 +204,8 @@ module outside_cuts(length, finger_width, cut_depth) {
         square([endCut, cut_depth]);
     }
   }
+}
+
+module empty() {
+  // Used if you don't want a given side.
 }
