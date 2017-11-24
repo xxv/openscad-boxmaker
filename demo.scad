@@ -6,7 +6,7 @@ box_inner = [100, 70, 50];
 thickness = 3;
 
 // Tab width (X, Y, Z, TopX, TopY) (mm)
-tabs = [7, 7, 7, 35, 25];
+tabs = [7, 7, 7, box_inner[0]/3, box_inner[1]/3];
 
 // When there's no top, leave off the last two dimensions
 tabs_no_top = [7, 7, 7];
