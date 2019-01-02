@@ -36,11 +36,11 @@ module layout_2d(inner, thickness, margin=2) {
   // top
   translate([spacingA, 0, 0])
     children(1);
-  // right
+  // left
   translate([spacingA * 2, inner[1], 0])
     rotate([0, 0, -90])
       children(2);
-  // left
+  // right
   translate([spacingA * 2 + inner[2] + thickness * 2 + margin, inner[1], 0])
     rotate([0, 0, -90])
       children(3);
@@ -50,6 +50,29 @@ module layout_2d(inner, thickness, margin=2) {
   // back
   translate([inner[0] + margin + thickness * 2,
              inner[1] + margin + thickness * 2, 0])
+    children(5);
+}
+
+module layout_2d_horizontal(inner, thickness, margin=2) {
+  spacingA = inner[0] + thickness * 2 + margin;
+  spacingB = inner[1] + thickness * 2 + margin;
+
+  // bottom
+  children(0);
+  // top
+  translate([spacingA, 0, 0])
+    children(1);
+  // left
+  translate([spacingA * 2, spacingB, 0])
+      children(2);
+  // right
+  translate([spacingA * 2 + spacingB, spacingB, 0])
+      children(3);
+  // front
+  translate([0, spacingB, 0])
+    children(4);
+  // back
+  translate([spacingA, spacingB, 0])
     children(5);
 }
 
